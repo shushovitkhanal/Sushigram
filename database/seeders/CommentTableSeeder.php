@@ -19,7 +19,19 @@ class CommentTableSeeder extends Seeder
         $a->post_reference = 1;
         $a->save();
 
-        Comment::factory()->count(50)->create();
+        $a = new Comment;
+        $a->content = "This is a another comment";
+        $a->author = 1;
+        $a->post_reference = 1;
+        $a->save();
+
+        $a = new Comment;
+        $a->content = "This is one more comment that looks the same";
+        $a->author = 1;
+        $a->post_reference = 1;
+        $a->save();
+
+        //Comment::factory()->count(50)->create();
 
 
     }
