@@ -22,6 +22,9 @@
                     <div class = "post_title">
                         {{$post -> title}}
                     </div>
+                    <div class="post_image">
+                        <img src="{{$post -> image}}">
+                    </div>
                 </div>
                 
             @endforeach

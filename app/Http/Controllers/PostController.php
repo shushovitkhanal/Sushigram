@@ -11,4 +11,5 @@ class PostController extends Controller
         $posts = Post::all();
         return view('feed', ['posts' => $posts]);
     }
+
 }

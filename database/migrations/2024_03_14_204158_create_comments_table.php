@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('content');
             $table->bigInteger('author')->unsigned();
 
-            $table->foreign('author')->references('id')->on('profiles')
+            $table->foreign('author')->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
             
             $table->bigInteger('post_reference')->unsigned();
