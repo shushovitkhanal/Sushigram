@@ -4,10 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [PostController::class, 'feed'])->name('feed');
 
 Route::get('/feed', [PostController::class, 'feed'])->middleware(['auth', 'verified'])->name('feed');
 

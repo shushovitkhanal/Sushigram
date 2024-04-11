@@ -17,7 +17,7 @@ class PostTableSeeder extends Seeder
         $a->title = "First Post";
         $a->caption = "This is my first post";
         $a->post_id = 1;
-        $a ->image = 'https://picsum.photos/200';
+        $a ->image = 'https://picsum.photos/id/87/854/480';
         $a -> save();
 
         Post::factory()->count(50)->create();

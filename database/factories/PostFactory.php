@@ -20,7 +20,7 @@ class PostFactory extends Factory
             'title' => fake()->sentence(),
             'caption' => fake()->paragraph(),
             'post_id' => fake()->numberBetween(2,50),
-            'image' => str_replace('{i}', rand(1,100), 'https://picsum.photos/id/{i}/300/300')
+            'image' => str_replace('{i}', rand(1,100), 'https://picsum.photos/id/{i}/854/480')
         ];
     }
         
