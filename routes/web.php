@@ -8,6 +8,8 @@ Route::get('/', [PostController::class, 'feed'])->name('feed');
 
 Route::get('/feed', [PostController::class, 'feed'])->middleware(['auth', 'verified'])->name('feed');
 
+Route::post('/post', [PostController::class, 'store'])->name('post.store');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
