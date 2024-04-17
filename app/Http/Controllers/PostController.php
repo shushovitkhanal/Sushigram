@@ -22,6 +22,14 @@ class PostController extends Controller
         $post -> post_id = $request -> user() -> id;
         $post -> title = $request -> get('title');
         $post -> caption = $request -> get('caption');
+
+        if ($request -> hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $image->storeAs('public/images', $imageName);
+            $imagePath = 'storage/images/' . $imageName;
+        }
+        $post -> image = $imagePath;
         $post->save();
 
         return redirect('/feed')->with('success', 'Post created successfully!');

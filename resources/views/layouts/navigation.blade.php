@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex justify-between">
-                        <img src="{{ asset('storage/images/logo2.png') }}" width="50" height="50">
+                        <img src="{{ asset('storage/images/logo1.png') }}" width="50" height="50">
                         <div class="logo_text">
                             SushiGram
                         </div>

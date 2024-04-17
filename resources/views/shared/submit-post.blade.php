@@ -12,6 +12,8 @@
                     Caption
                     <textarea name="caption" id="caption" rows="3" class="form-control"></textarea>
                 </div>
+                Image
+                <input type="file" name="image">
                 <div class="">
                     <button type="submit" class="btn">Submit</button>
                 </div>

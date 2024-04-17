@@ -8,7 +8,7 @@
             {{$post -> title}}
         </div>
         
-        <img src="{{$post -> image}}" class = "post_image">
+        <img src="{{asset($post -> image)}}" width="848">
 
         <div class="post_content">
             {{$post -> caption}}
