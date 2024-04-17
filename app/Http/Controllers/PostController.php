@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function feed(){
         $posts = Post::latest() -> get();
-        return view('feed', ['posts' => $posts]);
+        $users = User::all();
+        return view('feed', ['posts' => $posts, 'users' => $users]);
     }
 
     public function store(Request $request) {
@@ -28,11 +30,12 @@ class PostController extends Controller
             $imageName = $image->getClientOriginalName();
             $image->storeAs('public/images', $imageName);
             $imagePath = 'storage/images/' . $imageName;
+            $post -> image = $imagePath;
         }
-        $post -> image = $imagePath;
+        
         $post->save();
 
-        return redirect('/feed')->with('success', 'Post created successfully!');
+        return redirect()->route('feed')->with('post-success', 'Post created successfully');
     }
 
 }

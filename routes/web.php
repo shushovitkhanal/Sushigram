@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,8 @@ Route::get('/', [PostController::class, 'feed'])->name('feed');
 Route::get('/feed', [PostController::class, 'feed'])->middleware(['auth', 'verified'])->name('feed');
 
 Route::post('/post', [PostController::class, 'store'])->name('post.store');
+
+Route::post('/comments/{postId}', [CommentController::class, 'store'])->name('comments.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

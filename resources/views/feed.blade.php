@@ -14,10 +14,14 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="message" role="message">
-                Post made successfully.
-                <button type="button" data-bs-dismiss="message" aria-label="Close"> X </button>
-            </div>
+            @if (session() -> has('post-success'))
+                <div class="message" role="message">
+                    Post made successfully.
+                    <button class="close" id="closeBtn"></button>
+                    
+                </div>
+            @endif
+            
             @include('shared.submit-post')
 
             @include('shared.show-posts')

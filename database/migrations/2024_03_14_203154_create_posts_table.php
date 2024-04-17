@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('caption');
             $table->bigInteger('post_id')->unsigned();
-            $table->string('image')->default('https://picsum.photos/200');
+            $table->string('image')->default('empty');
 
             $table->foreign('post_id')->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
