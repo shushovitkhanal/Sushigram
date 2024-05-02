@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'feed'])->name('feed');
@@ -11,11 +12,13 @@ Route::get('/feed', [PostController::class, 'feed'])->middleware(['auth', 'verif
 
 Route::post('/post', [PostController::class, 'store'])->name('post.store');
 
-Route::post('/comments/{postId}', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/comments/{postID}', [CommentController::class, 'index'])->name('comments.index');
+
+Route::get('/user/{user_id}', [UserController::class, 'show'])->name('user.show');
+
+Route::get('/dashboard', [UserController::class, 'profile'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

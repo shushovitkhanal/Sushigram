@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function feed(){
-        $posts = Post::latest() -> get();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         $users = User::all();
         return view('feed', ['posts' => $posts, 'users' => $users]);
     }
@@ -21,7 +21,7 @@ class PostController extends Controller
         ]);
 
         $post = new Post();
-        $post -> post_id = $request -> user() -> id;
+        $post -> user_id = $request -> user() -> id;
         $post -> title = $request -> get('title');
         $post -> caption = $request -> get('caption');
 

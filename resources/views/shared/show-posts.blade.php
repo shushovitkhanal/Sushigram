@@ -1,13 +1,13 @@
 @foreach ($posts as $post)
     <div class = 'post'>
         @php
-            $userId = $post -> post_id;
+            $userId = $post -> user_id;
             $user = \App\Models\User::find($userId);
             $name = $user -> name
         @endphp
 
         <div class="post_content">
-            {{$name}}
+            <a href="{{ route('user.show', ['user_id'=>$userId]) }}">{{$name}}</a>
         </div>
 
         <div class = "post_title">
@@ -27,9 +27,20 @@
         </div>
 
         <div class="comment">
-            Comment
+            Comments
+            @foreach ($post->comments as $comment)
+                @php
+                    $commenter = \App\Models\User::find($comment -> user_id);
+                @endphp
+                <div>
+                    <a href="{{ route('user.show', ['user_id'=>$userId]) }}">{{$commenter -> name}}:</a>{{ $comment->content }}
+                </div>
+            @endforeach
         </div>
-        @include('shared.submit-comment')
+        @auth
+            @include('shared.submit-comment')
+        @endauth
 
     </div>
 @endforeach
+

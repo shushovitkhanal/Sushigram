@@ -25,6 +25,7 @@
             @include('shared.submit-post')
 
             @include('shared.show-posts')
+            {{ $posts->links() }}
             
         </div>
     </div>

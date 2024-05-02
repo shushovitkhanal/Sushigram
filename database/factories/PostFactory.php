@@ -19,7 +19,7 @@ class PostFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'caption' => fake()->paragraph(),
-            'post_id' => fake()->numberBetween(2,50),
+            'user_id' => fake()->numberBetween(2,50),
             'image' => str_replace('{i}', rand(1,100), 'https://picsum.photos/id/{i}/854/480')
         ];
     }
