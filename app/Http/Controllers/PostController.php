@@ -14,12 +14,39 @@ class PostController extends Controller
         return view('feed', ['posts' => $posts, 'users' => $users]);
     }
 
-    public function store(Request $request) {
+    public function edit($post_id) {
+        $post = Post::find($post_id);
+        return view('shared.edit-post', ['post' => $post]);
+    }
+
+    public function update(Request $request, $post_id) {
+
         $request->validate([
             'title' => ['required', 'string', 'max:100'],
             'caption' => ['string', 'max:255']
         ]);
 
+        $post = Post::find($post_id);
+        $post->title = $request->title;
+        $post->caption = $request->caption;
+        $post -> save();
+
+        return redirect()->route('feed')->with('post-update', 'Post edited successfully');
+    }
+
+    public function destroy($post_id) {
+        $post = Post::find($post_id);
+        $post -> delete();
+
+        return redirect()->route('feed')->with('post-delete', 'Post deleted successfully');
+    }
+
+    public function store(Request $request) {
+        $request->validate([
+            'title' => ['required', 'string', 'max:100'],
+            'caption' => ['string', 'max:255']
+        ]);
+        
         $post = new Post();
         $post -> user_id = $request -> user() -> id;
         $post -> title = $request -> get('title');

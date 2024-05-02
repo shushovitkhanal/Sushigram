@@ -3,7 +3,8 @@
         @php
             $userId = $post -> user_id;
             $user = \App\Models\User::find($userId);
-            $name = $user -> name
+            $name = $user -> name;
+            $currentUserId = auth() -> user() -> id;
         @endphp
 
         <div class="post_content">
@@ -25,6 +26,16 @@
         <div class="post_content">
             {{$post -> created_at}}
         </div>
+
+        @if ($userId == $currentUserId)
+            <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+
+            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger btn-block">Delete</button>
+            </form>    
+        @endif
 
         <div class="comment">
             Comments

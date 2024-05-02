@@ -20,6 +20,24 @@
                     <button class="close" id="closeBtn"></button>
                     
                 </div>
+            @elseif (session() -> has('post-update'))
+                <div class="message" role="message">
+                    Post edited successfully.
+                    <button class="close" id="closeBtn"></button>
+                    
+                </div>
+            @elseif (session() -> has('post-delete'))
+                <div class="message" role="message">
+                    Post deleted successfully.
+                    <button class="close" id="closeBtn"></button>
+                    
+                </div>
+            @elseif (session() -> has('post-fail'))
+                <div class="message" role="message">
+                    Post is invalid. Fix the fields and try again.
+                    <button class="close" id="closeBtn"></button>
+                    
+                </div>
             @endif
             
             @include('shared.submit-post')
