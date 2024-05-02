@@ -11,7 +11,7 @@
             <div class = "post">
         {{$user -> name}}
         <div class = "post_title">
-            Posts will show here
+            Posts will show 
             @foreach($posts as $post)
                     
                 <div class = "post_title">
@@ -37,7 +37,9 @@
             Comments will show here
 
             @foreach($user -> comments as $comment)
-                {{$comment -> content}}
+                <div class="comments">
+                    {{$comment -> content}}
+                </div>
             @endforeach
         </div>
 

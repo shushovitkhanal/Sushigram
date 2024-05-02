@@ -16,17 +16,19 @@ class UserController extends Controller
     public function show($user_id)
     {
         $user = User::findOrFail($user_id);
-        $posts = $user -> posts;
+        $posts = $user -> posts() -> paginate(5);
+        $comments = $user -> comments() -> paginate(5);
         
-        return view('profile.show', ['posts' => $posts, 'user' => $user]);
+        return view('profile.show', ['user' => $user, 'posts' => $posts, 'comments' => $comments]);
     }
 
     public function profile()
     {
         $user_id = Auth::user() -> id;
         $user = User::findOrFail($user_id);
-        $posts = $user -> posts;
+        $posts = $user -> posts() -> paginate(5);
+        $comments = $user -> comments() -> paginate(5);
         
-        return view('profile.show', ['posts' => $posts, 'user' => $user]);
+        return view('profile.show', ['posts' => $posts, 'user' => $user, 'comments' => $comments]);
     }
 }

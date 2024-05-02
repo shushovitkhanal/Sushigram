@@ -1,11 +1,17 @@
 <x-app-layout>
-    <div class = "post">
-        {{$user -> name}}
-        <div class = "post_title">
-            Posts will show here
+    <div>
+        <div class = "post">
+            <div class = "post_title">
+                {{$user -> name}}
+            </div>
+        </div>
+        <div class = "post">
+            <div class = "post_title">
+                Posts
+            </div>
             @foreach($posts as $post)
-                    
-                <div class = "post_title">
+            <div class = "post_tile">
+                <div class = "post_title_white">
                     {{ $post->title }}
                 </div>
 
@@ -20,16 +26,26 @@
                 <div class="post_content">
                     {{$post -> created_at}}
                 </div>
-
+            </div>
             @endforeach
+            {{$posts -> links()}}
+
         </div>
 
-        <div class = "post_title">
-            Comments will show here
-
+        <div class = "post">
+            <div class = "post_title">
+                Comments
+            </div>
             @foreach($user -> comments as $comment)
-                {{$comment -> content}}
+                <div class = "post_tile">
+                    {{$comment -> post -> title}}
+                    <div class="comment">
+                    {{$comment -> content}}
+                    </div>
+                </div>
             @endforeach
+            {{$comments -> links()}}
+            
         </div>
 
     </div>

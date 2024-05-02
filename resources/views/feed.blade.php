@@ -12,6 +12,12 @@
         </h2>
     </x-slot>
 
+    <script>
+        function close() {
+            var message = document.getElementById('messageerror');
+            message.style.display = 'none';
+        }
+    </script>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if (session() -> has('post-success'))
@@ -32,10 +38,10 @@
                     <button class="close" id="closeBtn"></button>
                     
                 </div>
-            @elseif (session() -> has('post-fail'))
-                <div class="message" role="message">
+            @elseif ($errors -> any())
+                <div id = "messageerror" class="message" role="message">
                     Post is invalid. Fix the fields and try again.
-                    <button class="close" id="closeBtn"></button>
+                    <button class="close" id="closeBtn" onclick="close()"></button>
                     
                 </div>
             @endif

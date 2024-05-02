@@ -4,39 +4,47 @@
             $userId = $post -> user_id;
             $user = \App\Models\User::find($userId);
             $name = $user -> name;
-            $currentUserId = auth() -> user() -> id;
+            $currentUserId = $current_user;
         @endphp
 
-        <div class="post_content">
-            <a href="{{ route('user.show', ['user_id'=>$userId]) }}">{{$name}}</a>
-        </div>
+        
+        <a href="{{ route('user.show', ['user_id'=>$userId]) }}">
+            <img src="{{ asset('storage/images/default-dp.png') }}" width="50" height="50">{{$name}}</img>
+        </a>
 
         <div class = "post_title">
             {{ $post->title }}
         </div>
 
-        @if ($post->image != 'empty')
-            <img src="{{ asset($post->image) }}" width="848">
-        @endif
+        <div class = "post_caption_image">
+            <div class="post_content">
+                {{ $post->caption }}
+            </div>
 
-        <div class="post_content">
-            {{ $post->caption }}
+            @if ($post->image != 'empty')
+                <img src="{{ asset($post->image) }}" width="70%" class="post_image">
+            @endif
         </div>
-
+        
         <div class="post_content">
             {{$post -> created_at}}
         </div>
 
-        @if ($userId == $currentUserId)
-            <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+        <div>
+            @if ($userId == $currentUserId)
 
-            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-block">Delete</button>
-            </form>    
-        @endif
+                <div class = "button_container">
+                    <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                </div>
 
+                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="button_container">Delete</button>
+                </form>    
+            @endif
+        </div>
+    
         <div class="comment">
             Comments
             @foreach ($post->comments as $comment)
@@ -44,7 +52,7 @@
                     $commenter = \App\Models\User::find($comment -> user_id);
                 @endphp
                 <div>
-                    <a href="{{ route('user.show', ['user_id'=>$userId]) }}">{{$commenter -> name}}:</a>{{ $comment->content }}
+                    <a href="{{ route('user.show', ['user_id'=>$userId]) }}">{{$commenter -> name}}:  </a>{{ $comment->content }}
                 </div>
             @endforeach
         </div>

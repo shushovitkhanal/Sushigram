@@ -4,27 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class PostController extends Controller
 {
     public function feed(){
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         $users = User::all();
-        return view('feed', ['posts' => $posts, 'users' => $users]);
+        $currentUser = 50;
+        if(Auth::check()){
+            $currentUser = Auth::user() -> id;
+        }
+
+        return view('feed', ['posts' => $posts, 'users' => $users, 'current_user'=>$currentUser]);
     }
 
     public function edit($post_id) {
         $post = Post::find($post_id);
-        return view('shared.edit-post', ['post' => $post]);
+        $currentUser = 50;
+        if(Auth::check()){
+            $currentUser = Auth::user() -> id;
+        }
+        return view('shared.edit-post', ['post' => $post, 'current_user'=>$currentUser]);
     }
 
     public function update(Request $request, $post_id) {
-
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => ['required', 'string', 'max:100'],
-            'caption' => ['string', 'max:255']
+            'caption' => ['required','string', 'max:255']
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('feed')->with('post-fail', 'Invalid Post, Try Again');
+        }
 
         $post = Post::find($post_id);
         $post->title = $request->title;
@@ -44,7 +59,8 @@ class PostController extends Controller
     public function store(Request $request) {
         $request->validate([
             'title' => ['required', 'string', 'max:100'],
-            'caption' => ['string', 'max:255']
+            'caption' => ['string', 'max:255'],
+            'image' => ['required']
         ]);
         
         $post = new Post();

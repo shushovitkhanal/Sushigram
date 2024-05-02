@@ -4,31 +4,32 @@
             $userId = $post -> user_id;
             $user = \App\Models\User::find($userId);
             $name = $user -> name;
-            $currentUserId = auth() -> user() -> id;
+            $currentUserId = $current_user;
         @endphp
 
-        <div class="post_content">
-            <a href="{{ route('user.show', ['user_id'=>$userId]) }}">{{$name}}</a>
-        </div>
+        <a href="{{ route('user.show', ['user_id'=>$userId]) }}">
+            <img src="{{ asset('storage/images/default-dp.png') }}" width="50" height="50">{{$name}}</img>
+        </a>
 
         <div class = "post_title">
             {{ $post->title }}
         </div>
 
-        @if ($post->image != 'empty')
-            <img src="{{ asset($post->image) }}" width="848">
-        @endif
+        <div class = "post_caption_image">
+            <div class="post_content">
+                {{ $post->caption }}
+            </div>
 
-        <div class="post_content">
-            {{ $post->caption }}
+            @if ($post->image != 'empty')
+                <img src="{{ asset($post->image) }}" width="70%" class="post_image">
+            @endif
         </div>
-
+        
         <div class="post_content">
             {{$post -> created_at}}
         </div>
-    </div>
 
-    <div class = "post">
+    <div class = "post_tile">
         <div class = "post_content">
             Edit Your Post
 
@@ -36,13 +37,13 @@
             @csrf
             <div class='form-group'>
                     Title
-                    <textarea name="title" id="title" rows="1" cols="max" class="form-control"></textarea>
+                    <textarea name="title" id="title" rows="1" cols="max" class="comment_box"></textarea>
             </div>
             <div class='form-group'>
                     Caption
-                    <textarea name="caption" id="caption" rows="3" class="form-control"></textarea>
+                    <textarea name="caption" id="caption" rows="3" class="comment_box"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Update Post</button>
+            <button type="submit" class="button_container">Update Post</button>
 </form>
         </div>
     </div>
