@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class = "post">
-    @php
+        @php
             $userId = $post -> user_id;
             $user = \App\Models\User::find($userId);
             $name = $user -> name;
@@ -44,7 +44,7 @@
                     <textarea name="caption" id="caption" rows="3" class="comment_box"></textarea>
             </div>
             <button type="submit" class="button_container">Update Post</button>
-</form>
+            </form>
         </div>
     </div>
 </x-app-layout>

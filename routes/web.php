@@ -20,9 +20,16 @@ Route::get('/user/{user_id}', [UserController::class, 'show'])->name('user.show'
 
 Route::get('/post/{post_id}/edit', [PostController::class, 'edit'])->name('posts.edit');
 
+Route::get('/comment/{comment_id}/edit', [CommentController::class, 'edit'])->name('comment.edit');
+
 Route::post('/post/{post_id}/update', [PostController::class, 'update'])->name('posts.update');
 
+Route::post('/comment/{comment_id}/update', [CommentController::class, 'update'])->name('comment.update');
+
 Route::delete('/post/{post_id}/destroy', [PostController::class, 'destroy'])->name('posts.destroy');
+
+Route::delete('/comment/{comment_id}/destroy', [CommentController::class, 'destroy'])->name('comment.destroy');
+
 
 Route::get('/dashboard', [UserController::class, 'profile'])->middleware(['auth', 'verified'])->name('dashboard');
 

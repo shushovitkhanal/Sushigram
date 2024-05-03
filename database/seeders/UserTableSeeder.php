@@ -19,6 +19,24 @@ class UserTableSeeder extends Seeder
         $a->password = "homestead";
         $a->save();
 
+        $a = new User;
+        $a->email = "nepalese@swan.ac.uk";
+        $a->name = "Nepalese Society";
+        $a->password = "nepalese";
+        $a->save();
+
+        $a = new User;
+        $a->email = "thai@swan.ac.uk";
+        $a->name = "Thai Society";
+        $a->password = "thai";
+        $a->save();
+
+        $a = new User;
+        $a->email = "indian@swan.ac.uk";
+        $a->name = "Indian Society";
+        $a->password = "indian";
+        $a->save();
+
         User::factory()->count(50)->create();
     }
 }

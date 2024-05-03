@@ -3,7 +3,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             @auth
-            Welcome to your feed, {{explode(' ', Auth::user() -> name)[0]}}
+            Discover new posts, {{explode(' ', Auth::user() -> name)[0]}}
             @endauth
 
             @guest
@@ -35,6 +35,18 @@
             @elseif (session() -> has('post-delete'))
                 <div class="message" role="message">
                     Post deleted successfully.
+                    <button class="close" id="closeBtn"></button>
+                    
+                </div>
+            @elseif (session() -> has('comment-delete'))
+                <div class="message" role="message">
+                    Comment deleted successfully.
+                    <button class="close" id="closeBtn"></button>
+                    
+                </div>
+            @elseif (session() -> has('comment-update'))
+                <div class="message" role="message">
+                    Comment edited successfully.
                     <button class="close" id="closeBtn"></button>
                     
                 </div>

@@ -46,14 +46,30 @@
         </div>
     
         <div class="comment">
-            Comments
+            <div class="post_title">
+                Comments
+            </div>
+            
             @foreach ($post->comments as $comment)
                 @php
                     $commenter = \App\Models\User::find($comment -> user_id);
                 @endphp
-                <div>
+                
                     <a href="{{ route('user.show', ['user_id'=>$userId]) }}">{{$commenter -> name}}:  </a>{{ $comment->content }}
-                </div>
+                    
+                    <div class = "button_group">
+                    @if ($comment->user_id == $currentUserId)
+                        <div class = "button_container">
+                            <a href="{{ route('comment.edit', $comment->id) }}">Edit</a>
+                        </div>
+                        <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="button_container">Delete</button>
+                        </form>    
+                    @endif
+                    </div>
+                
             @endforeach
         </div>
         @auth
