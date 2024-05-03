@@ -13,47 +13,58 @@
     </x-slot>
 
     <script>
-        function close() {
-            var message = document.getElementById('messageerror');
+        function closeMessage() {
+            var message = document.getElementById('message');
             message.style.display = 'none';
         }
     </script>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if (session() -> has('post-success'))
-                <div class="message" role="message">
+                <div class="message" role="message", id="message">
                     Post made successfully.
-                    <button class="close" id="closeBtn"></button>
+                    <button type="button" class="close" onclick="closeMessage()">
+                        x
+                    </button>
                     
                 </div>
             @elseif (session() -> has('post-update'))
-                <div class="message" role="message">
+                <div class="message" role="message", id="message">
                     Post edited successfully.
-                    <button class="close" id="closeBtn"></button>
+                    <button type="button" class="close" onclick="closeMessage()">
+                        x
+                    </button>
                     
                 </div>
             @elseif (session() -> has('post-delete'))
-                <div class="message" role="message">
+                <div class="message" role="message", id="message">
                     Post deleted successfully.
-                    <button class="close" id="closeBtn"></button>
+                    <button type="button" class="close" onclick="closeMessage()">
+                        x
+                    </button>
                     
                 </div>
             @elseif (session() -> has('comment-delete'))
-                <div class="message" role="message">
+                <div class="message" role="message", id = "message">
                     Comment deleted successfully.
-                    <button class="close" id="closeBtn"></button>
+                    <button type="button" class="close" onclick="closeMessage()">
+                        x
+                    </button>
                     
                 </div>
             @elseif (session() -> has('comment-update'))
-                <div class="message" role="message">
-                    Comment edited successfully.
-                    <button class="close" id="closeBtn"></button>
+                <div class="message" role="message", id="message">
+                    Comment edited successfully.<button type="button" class="close" onclick="closeMessage()">
+                        x
+                    </button><button class="close" id="closeBtn"></button>
                     
                 </div>
             @elseif ($errors -> any())
                 <div id = "messageerror" class="message" role="message">
                     Post is invalid. Fix the fields and try again.
-                    <button class="close" id="closeBtn" onclick="close()"></button>
+                    <button type="button" class="close" onclick="closeMessage()">
+                        x
+                    </button>
                     
                 </div>
             @endif
